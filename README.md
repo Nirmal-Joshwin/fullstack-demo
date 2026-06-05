@@ -1,88 +1,70 @@
-# Task Manager - MERN Stack Project
+# MERN Notes App
 
-This is my full stack web application made using the MERN stack (MongoDB, Express, React, Node.js) for Assignment-5.
+This is my full stack notes app made with the MERN stack (MongoDB, Express, React, Node)
+for Assignment 5. You can register, login and add/delete your own notes.
 
-Users can register and login. After logging in they can add, view, complete and delete their own tasks. All the data is stored in a MongoDB database.
+## Features
+- Register and Login (with JWT token + password hashing using bcrypt)
+- Add notes and delete notes
+- Notes are saved in MongoDB and shown on the home page
+- Only logged in users can see their notes
 
-## Technologies Used
+## Tech used
+- Frontend: React (Vite), axios, react-router-dom
+- Backend: Node, Express, Mongoose
+- Database: MongoDB Atlas
 
-- MongoDB - database
-- Express + Node.js - backend / API
-- React - frontend
-- JWT - for login authentication (tokens)
-- bcryptjs - for hashing passwords
+## Folders
+- `client` - the react frontend
+- `server` - the express backend
 
-## How to Run the Project
+## How to run locally
 
-You need Node.js and MongoDB installed on your computer first.
-
-### Backend (server)
-
-1. Open a terminal and go into the backend folder:
-
-   ```
-   cd backend
-   ```
-
-2. Install the packages:
-
-   ```
-   npm install
-   ```
-
-3. Make a file called `.env` (you can copy `.env.example`) with these values:
-
-   ```
-   MONGO_URI=mongodb://localhost:27017/taskapp
-   JWT_SECRET=mysecretkey
-   PORT=5000
-   ```
-
-4. Start the server:
-
-   ```
-   npm run dev
-   ```
-
-   If it works you will see "MongoDB connected" and "Server running on port 5000".
-
-### Frontend (React app)
-
-1. Open a NEW terminal and go into the frontend folder:
-
-   ```
-   cd frontend
-   ```
-
-2. Install the packages:
-
-   ```
-   npm install
-   ```
-
-3. Start the app:
-
-   ```
-   npm run dev
-   ```
-
-4. Open the link shown in the terminal (usually http://localhost:5173).
-
-## How to Use
-
-1. Click on Register and make an account.
-2. After registering you get logged in and taken to the dashboard.
-3. Add a task using the form. Click on a task to mark it as complete. Click Delete to remove it.
-
-## Folder Structure
-
+Backend:
 ```
-backend   - the server, database models and API routes
-frontend  - the React app (the user interface)
+cd server
+npm install
+```
+Make a `.env` file (see .env.example) and put your MongoDB URI and a JWT secret.
+Then run:
+```
+npm run dev
 ```
 
-## Notes
+Frontend (new terminal):
+```
+cd client
+npm install
+npm run dev
+```
+Make a `.env` file in client with `VITE_API_URL=http://localhost:5000`
 
-- Make sure MongoDB is running before you start the backend.
-- The backend runs on port 5000 and the frontend on port 5173.
-- The login uses a JWT token which is saved in the browser's localStorage.
+Open http://localhost:5173
+
+## How to deploy on Vercel
+
+I deployed the backend and frontend as two separate projects on Vercel.
+
+### MongoDB
+1. Make a free cluster on MongoDB Atlas
+2. Add a database user and password
+3. In Network Access allow 0.0.0.0/0 (so vercel can connect)
+4. Copy the connection string
+
+### Backend
+1. Import the repo on Vercel
+2. Set Root Directory to `server`
+3. Add env variables: MONGODB_URI and JWT_SECRET
+4. Deploy (you get a url like https://your-backend.vercel.app)
+
+### Frontend
+1. Import the same repo again on Vercel
+2. Set Root Directory to `client`
+3. Add env variable VITE_API_URL = your backend url
+4. Deploy
+
+That's it, the app works online now.
+
+## TODO (maybe later)
+- add edit note feature
+- better error messages instead of alert
